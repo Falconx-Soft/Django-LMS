@@ -19,6 +19,7 @@
                             <th>Roll No.</th>
                             <th>Submission date</th>
                             <th>Download File</th>
+                            <th>Grade</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,18 @@
                             <td>{{submission.student.roll_no}}</td>
                             <td><strong>{{submission.submission_timestamp|date:"d/m/Y"}}</strong> {{submission.submission_timestamp|date:"h:i A"}}</td>
                             <td><a class="btn btn-success text-center btn-icon-split" role="button" href="{{submission.file.url}}" download><span class="text-white-50 icon"><i class="fas fa-cloud-download-alt"></i></span><span class="text-white text">Download&nbsp;</span></a></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                      {{submission.grade}}
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="{% url 'teachers:assign_grade' assignment.id submission.id 'A' %}">A</a>
+                                      <a class="dropdown-item" href="{% url 'teachers:assign_grade' assignment.id submission.id 'B' %}">B</a>
+                                      <a class="dropdown-item" href="{% url 'teachers:assign_grade' assignment.id submission.id 'F' %}">F</a>
+                                    </div>
+                                  </div>
+                            </td>
                         </tr>
                         {% endfor %}
                         <!-- End: Duplicate it -->

@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DeleteView, DetailView
 from accounts.models import Classroom,Teacher,User,Section, Resource,Assignment,AssignmentSubmission
@@ -147,4 +147,10 @@ def ClassroomStudentsView(request,code):
     context_dict['classroom_students'] = classroom.students.all()
     
     return render(request, template_name='teachers/classroomstudents.html', context=context_dict)
+
+def assign_grade(request, ass_id, sub_id, grade):
+    sub_obj = AssignmentSubmission.objects.get(id=sub_id)
+    sub_obj.grade = grade
+    sub_obj.save()
+    return redirect('teachers:assignment_submissions', pk=ass_id)
 

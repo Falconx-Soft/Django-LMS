@@ -7,7 +7,8 @@ from .views import (DashboardView,
                     MyAssignmentView,
                     AssignmentSubmissionDeleteView,
                     joinClassroomView,
-                    LeaveClassroomView
+                    LeaveClassroomView,
+                    view_grade
                     )
 
 app_name = 'students'
@@ -22,4 +23,6 @@ urlpatterns = [
     path('delete-submission/<int:pk>/', AssignmentSubmissionDeleteView.as_view(), name='delete_submission'),
     path('join-new/',joinClassroomView, name='join_classroom'),
     path('leave-classroom/<slug:code>/', LeaveClassroomView,name='leave_classroom'),
+
+    path('view-grade/<int:pk>/', view_grade,name='view_grade'),
 ]

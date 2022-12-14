@@ -4,7 +4,7 @@ from django import views
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DeleteView, DetailView
-from accounts.models import Classroom,Teacher,User,Section, Resource,Assignment,AssignmentSubmission
+from accounts.models import Classroom,Teacher,User,Section, Resource,Assignment,AssignmentSubmission, Student
 from accounts.passtests import StudentTestMixin, TeacherTestMixin
 from .forms import AssignmentSubmissionForm, JoinClassroomForm
 
@@ -94,7 +94,12 @@ def joinClassroomView(request):
 def LeaveClassroomView(request,code):
     request.user.students.classrooms.remove(Classroom.objects.filter(code=code).first())
     return HttpResponseRedirect(reverse('students:dashboard'))
-    
+
+def view_grade(request, pk):
+    assignment_obj = Assignment.objects.get(id=pk)
+    studen_obj = Student.objects.get(user=request.user)
+    ass_obj = AssignmentSubmission.objects.get(assignment=assignment_obj, student=studen_obj)
+    return render(request, 'students/grade.html', {'ass_obj':ass_obj, 'assignment':assignment_obj})
 
 
 

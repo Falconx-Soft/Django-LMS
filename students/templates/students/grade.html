@@ -1,0 +1,45 @@
+{% extends 'students/base.html' %}
+
+<!-- Load Static -->
+{% load static %}
+
+<!-- Title Heading -->
+{% block title %}Resources{% endblock title %}
+
+<!-- Start Content Block -->
+{% block content %}
+
+<div class="container-fluid">
+    <!-- Start: Basic Card -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="text-primary m-0 font-weight-bold">{{assignment.title}}</h6>
+        </div>
+        <div class="card-body">
+
+            <!-- Start: Else Loop -->
+            <div>
+                {% if ass_obj.grade != "F" %}
+                    <div class="alert alert-success" role="alert">
+                        <span>
+                            <strong>Grade is : {{ass_obj.grade}}</strong>
+                            <br>
+                        </span>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        <span>
+                            <strong>Grade is : {{ass_obj.grade}}</strong>
+                            <br>
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+            <!-- End: Else Loop -->
+        </div>
+    </div>
+    <!-- End: Basic Card -->
+</div>
+
+
+{% endblock content %}
