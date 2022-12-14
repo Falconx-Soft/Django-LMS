@@ -320,6 +320,14 @@ def submission_rename_upload_file(instance, filename):
 
 class AssignmentSubmission(models.Model):
 
+    # GRADE_CHOICES = (
+    #     ("A", "A"),
+    #     ("B", "B"),
+    #     ("C", "C"),
+    #     ("D", "D"),
+    #     ("F", "F"),
+    # )
+
     student = models.ForeignKey(
         "Student", 
         verbose_name=_("Submitted by"), 
@@ -342,6 +350,13 @@ class AssignmentSubmission(models.Model):
         default=timezone.now,
         editable=False
     )
+
+    # grade = models.CharField(
+    #     max_length=200, 
+    #     choices=GRADE_CHOICES,
+    #     null=True, 
+    #     blank=True
+    # )
     
     class Meta:
         verbose_name = _("assignmentsubmission")
